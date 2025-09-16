@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: n8n-config
+  namespace: n8n
+data:
+  N8N_ENCRYPTION_KEY: "izTzVJom154qqpvHi6rQkchteE1QhPm7"
+  N8N_HOST: "n8n.workune"
+  N8N_PORT: "5678"
+  N8N_SECURE_COOKIE: "false"
+  N8N_PROTOCOL: "https"
+  N8N_EDITOR_BASE_URL: "https://n8n.workune"
+  WEBHOOK_URL: "https://n8n.workune"
+
+  EXECUTIONS_MODE: "queue"
+  QUEUE_BULL_REDIS_HOST: "redis"
+  QUEUE_BULL_REDIS_PORT: "6379"
+
+  DB_TYPE: "postgresdb"
+  DB_POSTGRESDB_DATABASE: "n8n"
+  DB_POSTGRESDB_HOST: "127.0.0.1"
+  DB_POSTGRESDB_PORT: "5432"
+  DB_POSTGRESDB_USER: "n8n-sql@workune.iam"  # Cloud SQL IAM user created with gcloud

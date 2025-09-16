@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n-worker
+  namespace: n8n
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: n8n-worker
+  template:
+    metadata:
+      labels:
+        app: n8n-worker
+    spec:
+      serviceAccountName: n8n-sa
+      containers:
+        - name: n8n-worker
+          image: n8nio/n8n:latest
+          command: ["n8n"]
+          args: ["worker"]
+          envFrom:
+            - configMapRef:
+                name: n8n-config
+          env:
+            - name: NODE_FUNCTION_ALLOW_EXTERNAL
+              value: "*"
+
+        - name: cloud-sql-proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.18.2
+          args:
+            - "--structured-logs"
+            - "--auto-iam-authn"
+            - "workune:us-central1:n8n-postgres"
+          securityContext:
+            runAsNonRoot: true

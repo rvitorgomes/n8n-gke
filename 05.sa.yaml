@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: n8n-sa
+  namespace: n8n
+  annotations:
+    iam.gke.io/gcp-service-account: "n8n-sql@workune.iam.gserviceaccount.com"
